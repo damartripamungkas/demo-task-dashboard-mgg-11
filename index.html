@@ -12655,6 +12655,21 @@
                 Interface
             </div>
 
+            <!-- Task navbar -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTask"
+                    aria-expanded="true" aria-controls="collapseTask">
+                    <i class="fas fa-fw fa-tasks"></i>
+                    <span>Task</span>
+                </a>
+                <div id="collapseTask" class="collapse" aria-labelledby="headingTask" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">tugas dari previewer</h6>
+                        <a class="collapse-item" onclick="moveContentToTaskTask()">task</a>
+                    </div>
+                </div>
+            </li>
+
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -13133,6 +13148,7 @@
                                             <tbody id="message-chat-table"></tbody>
                                         </table>
 
+
                                         <!-- Modal Message-Chat-Table -->
                                         <div class="modal fade" id="modal-button-answer-from-message-chat-table"
                                             tabindex="-1" role="dialog"
@@ -13150,7 +13166,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form onsubmit="return sendMessageEmail()">
+                                                        <form onsubmit="sendMessageEmail()">
                                                             <div class="form-group">
                                                                 <label for="recipient-name"
                                                                     class="col-form-label">From</label>
@@ -13616,6 +13632,7 @@
         };
     </script>
 
+
     <script lang="text/javascript">
         // <!-- change content to another content on this page -->
         const idContainerFluid = document.getElementById("container-fluid");
@@ -13630,7 +13647,60 @@
                 dateAnnual: "01/01/2021 ~ 01/02/2022"
             }
         ];
-        const deleteDataContentAdminEarnings = (id) => {
+
+        // content task/task
+        let dataContentTaskTask = [
+            {
+                process: "50%",
+                nama: "membuat online store",
+                membutuhkan: "backend, frontend",
+                pemesan: "joko",
+                harga: "Rp5.000.000",
+                deadline: "01/06/2022",
+            },
+            {
+                process: "90%",
+                nama: "membuat landing page",
+                membutuhkan: "frontend",
+                pemesan: "anwar",
+                harga: "Rp500.000",
+                deadline: "01/04/2022",
+            },
+            {
+                process: "80%",
+                nama: "bot scrapper google",
+                membutuhkan: "backend",
+                pemesan: "riki",
+                harga: "Rp10.000.000",
+                deadline: "14/05/2022",
+            }
+        ];
+
+        const addDataContentTaskTask = () => {
+            renderSweetAlertSuccess();
+            setTimeout(() => {
+                $('#modal-button-add-new-data-task-task').modal('hide');
+                moveContentToTaskTask();
+            }, 900);
+            const val1 = document.getElementById("modal-button-add-new-data-task-task-process").value;
+            const val2 = document.getElementById("modal-button-add-new-data-task-task-nama").value;
+            const val3 = document.getElementById("modal-button-add-new-data-task-task-membutuhkan").value;
+            const val4 = document.getElementById("modal-button-add-new-data-task-task-pemesan").value;
+            const val5 = document.getElementById("modal-button-add-new-data-task-task-harga").value;
+            const val6 = document.getElementById("modal-button-add-new-data-task-task-deadline").value;
+            const obj = {
+                process: val1,
+                nama: val2,
+                membutuhkan: val3,
+                pemesan: val4,
+                harga: val5,
+                deadline: val6,
+            };
+            console.log(obj);
+            dataContentTaskTask.push(obj);
+        };
+
+        const deleteDataContentTaskTask = (id, renderAgain) => {
             Swal.fire({
                 title: 'Do you want to delete the data?',
                 showDenyButton: true,
@@ -13639,13 +13709,30 @@
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
-                    dataContentAdminEarnings = dataContentAdminEarnings.splice(id, dataContentAdminEarnings.length);
-                    console.log(dataContentAdminEarnings)
-                    moveContentToAdminEarnings();
+                    delete dataContentTaskTask[id];
+                    renderAgain();
                     Swal.fire('Delete success', '', 'success')
                 }
             })
         };
+
+        const deleteDataContentAdminEarnings = (id, renderAgain) => {
+            Swal.fire({
+                title: 'Do you want to delete the data?',
+                showDenyButton: true,
+                confirmButtonText: 'Delete',
+                denyButtonText: `Close`,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    dataContentAdminEarnings.splice(id, 1);
+                    console.log(dataContentAdminEarnings)
+                    renderAgain();
+                    Swal.fire('Delete success', '', 'success')
+                }
+            })
+        };
+
         var moveContentToAdminEarnings = () => {
             const structHeadTable = ["#", "earning monthly", "earning annual", "date earning monthly", "date earning annual", "perform"];
             idContainerFluid.innerHTML = `
@@ -13684,7 +13771,7 @@
                                     <td class="btn btn-danger btn-sm" id=
                                     "${dataContentAdminEarnings[0] === undefined ? "" : dataContentAdminEarnings[0].id}" 
                                     onclick="deleteDataContentAdminEarnings(
-                                        ${dataContentAdminEarnings[0] === undefined ? "" : dataContentAdminEarnings[0].id}
+                                        ${dataContentAdminEarnings[0] === undefined ? "" : dataContentAdminEarnings[0].id}, moveContentToAdminEarnings
                                     )">delete</td>
                                 `
                 }
@@ -13718,6 +13805,122 @@
 	</div>
 </div>
                 `;
+        };
+
+        var moveContentToTaskTask = () => {
+            const structHeadTable = ["#", "process", "nama", "membutuhkan", "pemesan", "harga", "deadline", "perform"];
+            const mapping = dataContentTaskTask.map((it, index) => {
+                if (it === undefined) {
+                    return ``;
+                } else {
+                    return it = `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${it.process}</td>
+                    <td>${it.nama}</td>
+                    <td>${it.membutuhkan}</td>
+                    <td>${it.pemesan}</td>
+                    <td>${it.harga}</td>
+                    <td>${it.deadline}</td>
+                    <td class="btn btn-danger btn-sm" id= "${index}" onclick="deleteDataContentTaskTask(${index}, moveContentToTaskTask)">delete</td>
+                </tr>`
+                }
+            });
+
+            let txt = "";
+            for (let index = 0; index < mapping.length; index++) {
+                let element = mapping[index];
+                if (element != undefined) {
+                    txt += element;
+                }
+
+                if ((index + 1) == mapping.length) {
+                    idContainerFluid.innerHTML = `
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+	<h1 class="h3 mb-0 text-gray-800">Task Client</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm" data-toggle="modal" data-target="#modal-button-add-new-data-task-task">
+        Add New Data  
+    </a>
+</div>
+<div class="row">
+	<div class="col-lg-12 mb-4">
+		<div class="card shadow mb-4">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-dark">Manage Data Task</h6> </div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col">${structHeadTable[0]}</th>
+								<th scope="col">${structHeadTable[1]}</th>
+								<th scope="col">${structHeadTable[2]}</th>
+								<th scope="col">${structHeadTable[3]}</th>
+                                <th scope="col">${structHeadTable[4]}</th>
+                                <th scope="col">${structHeadTable[5]}</th>
+                                <th scope="col">${structHeadTable[6]}</th>
+                                <th scope="col">${structHeadTable[7]}</th>
+							</tr>
+						</thead>
+						<tbody id="tast-task">${txt}</tbody>
+					</table>
+
+                    <!-- modal add new data task-task -->
+                                        <div class="modal fade" id="modal-button-add-new-data-task-task" tabindex="-1"
+                                            role="dialog" aria-labelledby="modal-button-add-new-data-task-task-label"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="modal-button-add-new-data-task-task-label">Add New Data</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form onsubmit="addDataContentTaskTask()">
+                                                            <div class="form-group">
+                                                                <label for="process" class="col-form-label">process</label>
+                                                                <input type="text" id="modal-button-add-new-data-task-task-process" class="form-control">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="nama" class="col-form-label">nama</label>
+                                                                <input type="text" id="modal-button-add-new-data-task-task-nama" class="form-control text-truncate">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="membutuhkan" class="col-form-label">membutuhkan</label>
+                                                                <input type="text" id="modal-button-add-new-data-task-task-membutuhkan" class="form-control text-truncate">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="pemesan" class="col-form-label">pemesan</label>
+                                                                <input type="text" id="modal-button-add-new-data-task-task-pemesan" class="form-control text-truncate">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="harga" class="col-form-label">harga</label>
+                                                                <input type="text" id="modal-button-add-new-data-task-task-harga" class="form-control text-truncate">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="deadline" class="col-form-label">deadline</label>
+                                                                <input type="text" id="modal-button-add-new-data-task-task-deadline" class="form-control text-truncate">
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                                <button id="send-add-new-data" type="submit" class="btn btn-success">Send</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+                `;
+                }
+            }
         };
     </script>
 
