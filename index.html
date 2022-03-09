@@ -67,7 +67,7 @@
                 <div id="collapseTask" class="collapse" aria-labelledby="headingTask" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">task client order</h6>
-                        <a class="collapse-item" onclick="moveContentToTaskTask()">task</a>
+                        <a class="collapse-item" href="#" onclick="moveContentToTaskTask()">task</a>
                     </div>
                 </div>
             </li>
@@ -82,9 +82,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">manage data admin</h6>
-                        <a class="collapse-item" onclick="moveContentToAdminEarnings()">Earnings</a>
-                        <a class="collapse-item" onclick="renderSweetAlertMaintenance()">Revenue</a>
-                        <a class="collapse-item" onclick="renderSweetAlertMaintenance()">Projects</a>
+                        <a class="collapse-item" href="#" onclick="moveContentToAdminEarnings()">Earnings</a>
+                        <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Revenue</a>
+                        <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Projects</a>
                     </div>
                 </div>
             </li>
@@ -100,7 +100,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">setting landingpage</h6>
-                        <a class="collapse-item" onclick="renderSweetAlertMaintenance()">page</a>
+                        <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">page</a>
                     </div>
                 </div>
             </li>
@@ -159,7 +159,7 @@
                                 </h6>
 
                                 <div id="message-chat-notifications"></div>
-                                <a class="dropdown-item text-center small text-gray-500" href="#message-chat-table">Read More Messages</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="index.html#message-chat-table">Read More Messages</a>
                             </div>
                         </li>
 
@@ -747,7 +747,7 @@
             const idCardEarning4 = document.getElementById('card-earning-monthly-4');
             for (let index = 0; index < lengthListData; index++) {
                 const element = listDataMessageChatNotifications[index];
-                temporaryText = temporaryText.concat(` <a class="dropdown-item d-flex align-items-center" href="#message-chat-table"> <div class="dropdown-list-image mr-3"> <img class="rounded-circle" src="https://raw.githubusercontent.com/damartripamungkas/task-dashboard/main/img/undraw_profile_1.svg" alt="..."> <div class="status-indicator bg-success"></div></div><div class="font-weight-bold"> <div class="text-truncate">${element.message}</div><div class="small text-gray-500">${element.name}· ${element.waktu}m</div></div></a> `);
+                temporaryText = temporaryText.concat(` <a class="dropdown-item d-flex align-items-center" href="index.html#message-chat-table"> <div class="dropdown-list-image mr-3"> <img class="rounded-circle" src="https://raw.githubusercontent.com/damartripamungkas/task-dashboard/main/img/undraw_profile_1.svg" alt="..."> <div class="status-indicator bg-success"></div></div><div class="font-weight-bold"> <div class="text-truncate">${element.message}</div><div class="small text-gray-500">${element.name}· ${element.waktu}m</div></div></a> `);
 
                 idNotifNewCount.innerText = index + 1;
                 idCardEarning4.innerText = index + 1;
@@ -826,7 +826,7 @@
             const membutuhkan = document.getElementById("modal-button-edit-from-task-task-table-membutuhkan").value;
             const pemesan = document.getElementById("modal-button-edit-from-task-task-table-pemesan").value;
             const harga = document.getElementById("modal-button-edit-from-task-task-table-harga").value;
-            const deadline = document.getElementById("modal-button-edit-from-task-task-table-deadline").value;
+            const deadline = document.getElementById("modal-button-edit-from-task-task-table-deadline").value.split("-").reverse().toString().replace(/,/g, "/");
             dataContentTaskTask[lastIndexDataContentTaskTaskEdit] = {
                 process,
                 nama,
@@ -851,7 +851,7 @@
             const val3 = document.getElementById("modal-button-add-new-data-task-task-membutuhkan").value;
             const val4 = document.getElementById("modal-button-add-new-data-task-task-pemesan").value;
             const val5 = document.getElementById("modal-button-add-new-data-task-task-harga").value;
-            const val6 = document.getElementById("modal-button-add-new-data-task-task-deadline").value;
+            const val6 = document.getElementById("modal-button-add-new-data-task-task-deadline").value.split("-").reverse().toString().replace(/,/g, "/");
             const obj = {
                 process: val1,
                 nama: val2,
@@ -863,7 +863,7 @@
             dataContentTaskTask.push(obj);
             activityLogRecord.push({
                 page: "task-task",
-                execution: `add data ${val3}`,
+                execution: `add data ${val4}`,
                 date: new Date().toLocaleDateString("id", "ID")
             });
             hiddenModal("modal-button-add-new-data-task-task", moveContentToTaskTask);
@@ -916,8 +916,7 @@
                 if (it === undefined) {
                     return ``;
                 } else {
-                    return it = `<tr> <td>${index + 1}</td><td>Rp${parseInt(it.monthly).toLocaleString("id", "ID")}</td><td>Rp${parseInt(it.annual).toLocaleString("id", "ID")
-}</td><td>${it.dateMonthly}</td><td>${it.dateAnnual}</td><td class="btn btn-secondary btn-sm" id="${index}" onclick="renderSweetAlertMaintenance()">edit</td><td class="btn btn-danger btn-sm" id="${index}" onclick="deleteDataContentAdminEarnings(${index}, moveContentToAdminEarnings)">delete</td></tr>`;
+                    return it = `<tr> <td>${index + 1}</td><td>Rp${parseInt(it.monthly).toLocaleString("id", "ID")}</td><td>Rp${parseInt(it.annual).toLocaleString("id", "ID")}</td><td>${it.dateMonthly}</td><td>${it.dateAnnual}</td><div class="btn-toolbar" role="toolbar"> <td class="btn-group mr-2 btn btn-secondary btn-sm" role="group" id="${index}" onclick="renderSweetAlertMaintenance()">edit</td><td class="btn-group btn btn-danger btn-sm" role="group" id="${index}" onclick="deleteDataContentAdminEarnings(${index}, moveContentToAdminEarnings)">delete</td></div></tr>`;
                 }
             });
 
@@ -939,7 +938,7 @@
                 if (it === undefined) {
                     return ``;
                 } else {
-                    return  `<tr> <td>${index + 1}</td><td>${it.process}</td><td>${it.nama}</td><td>${it.membutuhkan}</td><td>${it.pemesan}</td><td>${it.harga}</td><td>${it.deadline}</td><td class="btn btn-secondary btn-sm" id="${index}" data-toggle="modal" data-target="#modal-button-edit-from-task-task-table" onclick="setValueFromModalButtonEditTableTaskTask(${index})">edit</td><td class="btn btn-danger btn-sm" id="${index}" onclick="deleteDataContentTaskTask(${index}, moveContentToTaskTask)">delete</td></tr>`;
+                    return  `<tr> <td>${index + 1}</td><td>${it.process}</td><td>${it.nama}</td><td>${it.membutuhkan}</td><td>${it.pemesan}</td><td>${it.harga}</td><td>${it.deadline}</td><td class="btn-group mr-2 btn btn-secondary btn-sm" id="${index}" role="group" data-toggle="modal" data-target="#modal-button-edit-from-task-task-table" onclick="setValueFromModalButtonEditTableTaskTask(${index})">edit</td><td class="btn-group btn btn-danger btn-sm" id="${index}" role="group" onclick="deleteDataContentTaskTask(${index}, moveContentToTaskTask)">delete</td></tr>`;
                 }
             });
 
@@ -952,7 +951,7 @@
                 }
 
                 if ((index + 1) == mapping.length) {
-                    idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Task Client</h1> <div class="btn-toolbar" role="toolbar"> <div class="btn-group mr-2" role="group" aria-label="Second group"> <button type="button" class="btn btn-sm btn-dark shadow-sm" data-toggle="modal" data-target="#modal-button-add-new-data-task-task">Add New Data</button> </div><div class="btn-group" role="group" aria-label="Third group"> <button type="button" class="btn btn-sm btn-dark shadow-sm" onclick="generatePdfTable('table')">Generate Report</button> </div></div></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-header py-3"> <h6 class="m-0 font-weight-bold text-dark">Manage Data Task</h6> </div><div class="card-body"> <div class="table-responsive"> <table id="table" class="table table-hover"> <thead> <tr> <th scope="col">${structHeadTableTaskTask[0]}</th> <th scope="col">${structHeadTableTaskTask[1]}</th> <th scope="col">${structHeadTableTaskTask[2]}</th> <th scope="col">${structHeadTableTaskTask[3]}</th> <th scope="col">${structHeadTableTaskTask[4]}</th> <th scope="col">${structHeadTableTaskTask[5]}</th> <th scope="col">${structHeadTableTaskTask[6]}</th> <th scope="col">${structHeadTableTaskTask[7]}</th> </tr></thead> <tbody id="tast-task">${txt}</tbody> </table> <div class="modal fade" id="modal-button-add-new-data-task-task" tabindex="-1" role="dialog" aria-labelledby="modal-button-add-new-data-task-task-label" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="modal-button-add-new-data-task-task-label">Add New Data</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div><div class="modal-body"> <div class="form-group"> <label for="process" class="col-form-label">${structHeadTableTaskTask[1]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[1]}" class="form-control"> </div><div class="form-group"> <label for="nama" class="col-form-label">${structHeadTableTaskTask[2]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[2]}" class="form-control text-truncate"> </div><div class="form-group"> <label for="membutuhkan" class="col-form-label">${structHeadTableTaskTask[3]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[3]}" class="form-control text-truncate"> </div><div class="form-group"> <label for="pemesan" class="col-form-label">${structHeadTableTaskTask[4]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[4]}" class="form-control text-truncate"> </div><div class="form-group"> <label for="harga" class="col-form-label">${structHeadTableTaskTask[5]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[5]}" class="form-control text-truncate"> </div><div class="form-group"> <label for="deadline" class="col-form-label">${structHeadTableTaskTask[6]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[6]}" class="form-control text-truncate"> </div><div class="modal-footer"> <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> <button id="send-add-new-data" onclick="addDataContentTaskTask()" class="btn btn-success">Send</button> </div></div></div></div></div><div class="modal fade" id="modal-button-edit-from-task-task-table" tabindex="-1" role="dialog" aria-labelledby="modal-button-edit-from-task-task-table-label" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="modal-button-edit-from-task-task-table-label">Answer email message</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div><div class="modal-body"> <div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[1]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[1]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[2]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[2]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[3]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[3]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[4]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[4]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[5]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[5]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[6]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[6]}" class="form-control"> </div><div class="modal-footer"> <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> <button class="btn btn-success" onclick="updateDataContentTaskTask()">Edit</button> </div></div></div></div></div></div></div></div></div></div>`;
+                    idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Task Client</h1> <div class="btn-toolbar" role="toolbar"> <div class="btn-group mr-2" role="group" aria-label="Second group"> <button type="button" class="btn btn-sm btn-dark shadow-sm" data-toggle="modal" data-target="#modal-button-add-new-data-task-task">Add New Data</button> </div><div class="btn-group" role="group" aria-label="Third group"> <button type="button" class="btn btn-sm btn-dark shadow-sm" onclick="generatePdfTable('table')">Generate Report</button> </div></div></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-header py-3"> <h6 class="m-0 font-weight-bold text-dark">Manage Data Task</h6> </div><div class="card-body"> <div class="table-responsive"> <table id="table" class="table table-hover"> <thead> <tr> <th scope="col">${structHeadTableTaskTask[0]}</th> <th scope="col">${structHeadTableTaskTask[1]}</th> <th scope="col">${structHeadTableTaskTask[2]}</th> <th scope="col">${structHeadTableTaskTask[3]}</th> <th scope="col">${structHeadTableTaskTask[4]}</th> <th scope="col">${structHeadTableTaskTask[5]}</th> <th scope="col">${structHeadTableTaskTask[6]}</th> <th scope="col">${structHeadTableTaskTask[7]}</th> </tr></thead> <tbody id="tast-task">${txt}</tbody> </table> <div class="modal fade" id="modal-button-add-new-data-task-task" tabindex="-1" role="dialog" aria-labelledby="modal-button-add-new-data-task-task-label" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="modal-button-add-new-data-task-task-label">Add New Data</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div><div class="modal-body"> <div class="form-group"> <label for="process" class="col-form-label">${structHeadTableTaskTask[1]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[1]}" class="form-control"> </div><div class="form-group"> <label for="nama" class="col-form-label">${structHeadTableTaskTask[2]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[2]}" class="form-control text-truncate"> </div><div class="form-group"> <label for="membutuhkan" class="col-form-label">${structHeadTableTaskTask[3]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[3]}" class="form-control text-truncate"> </div><div class="form-group"> <label for="pemesan" class="col-form-label">${structHeadTableTaskTask[4]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[4]}" class="form-control text-truncate"> </div><div class="form-group"> <label for="harga" class="col-form-label">${structHeadTableTaskTask[5]}</label> <input type="text" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[5]}" class="form-control text-truncate"> </div><div class="form-group"> <label for="deadline" class="col-form-label">${structHeadTableTaskTask[6]}</label> <input type="date" id="modal-button-add-new-data-task-task-${structHeadTableTaskTask[6]}" class="form-control text-truncate"> </div><div class="modal-footer"> <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> <button id="send-add-new-data" onclick="addDataContentTaskTask()" class="btn btn-success">Send</button> </div></div></div></div></div><div class="modal fade" id="modal-button-edit-from-task-task-table" tabindex="-1" role="dialog" aria-labelledby="modal-button-edit-from-task-task-table-label" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="modal-button-edit-from-task-task-table-label">Edit data</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div><div class="modal-body"> <div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[1]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[1]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[2]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[2]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[3]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[3]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[4]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[4]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[5]}</label> <input type="text" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[5]}" class="form-control"> </div><div class="form-group"> <label class="col-form-label">${structHeadTableTaskTask[6]}</label> <input type="date" id="modal-button-edit-from-task-task-table-${structHeadTableTaskTask[6]}" class="form-control"> </div><div class="modal-footer"> <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> <button class="btn btn-success" onclick="updateDataContentTaskTask()">Edit</button> </div></div></div></div></div></div></div></div></div></div>`;
                 }
             }
         };
