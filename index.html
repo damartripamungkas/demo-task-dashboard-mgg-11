@@ -807,6 +807,8 @@
         const idBodyPageTop = document.getElementById("page-top");
         const structHeadTableTaskTask = ["#", "process", "nama", "membutuhkan", "pemesan", "harga", "deadline", "perform"];
         const structHeadTableAdminEarnings = ["#", "earning monthly", "earning annual", "date earning monthly", "date earning annual", "perform"];
+        const monthNames = ["Januari", "Februari", "Maret", "April", "Mey", "Juni", "July", "Agustus", "September", "Oktober", "November", "Desember"
+        ];
         let lastIndexDataContentTaskTaskEdit;
 
         const setValueFromModalButtonEditTableTaskTask = (index) => {
@@ -948,7 +950,9 @@
                 if (it === undefined) {
                     return ``;
                 } else {
-                    return  `<tr> <td>${index + 1}</td><td>${it.process}</td><td>${it.nama}</td><td>${it.membutuhkan}</td><td>${it.pemesan}</td><td>Rp${parseInt(it.harga).toLocaleString("id", "ID")}</td><td>${it.deadline}</td><td class="btn-group mr-2 btn btn-secondary btn-sm" id="${index}" role="group" data-toggle="modal" data-target="#modal-button-edit-from-task-task-table" onclick="setValueFromModalButtonEditTableTaskTask(${index})">edit</td><td class="btn-group btn btn-danger btn-sm" id="${index}" role="group" onclick="deleteDataContentTaskTask(${index}, moveContentToTaskTask)">delete</td></tr>`;
+                    const splitDeadline = it.deadline.split("/");
+                    const parsingDeadline = `${splitDeadline[0]} ${monthNames[Math.ceil(splitDeadline[1]) - 1]} ${splitDeadline[2]}`;
+                    return  `<tr> <td>${index + 1}</td><td>${it.process}</td><td>${it.nama}</td><td>${it.membutuhkan}</td><td>${it.pemesan}</td><td>Rp${parseInt(it.harga).toLocaleString("id", "ID")}</td><td>${parsingDeadline}</td><td class="btn-group mr-2 btn btn-secondary btn-sm" id="${index}" role="group" data-toggle="modal" data-target="#modal-button-edit-from-task-task-table" onclick="setValueFromModalButtonEditTableTaskTask(${index})">edit</td><td class="btn-group btn btn-danger btn-sm" id="${index}" role="group" onclick="deleteDataContentTaskTask(${index}, moveContentToTaskTask)">delete</td></tr>`;
                 }
             });
 
