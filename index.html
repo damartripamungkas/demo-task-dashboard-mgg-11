@@ -83,8 +83,8 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">manage data admin</h6>
                         <a class="collapse-item" href="#" onclick="moveContentToAdminEarnings()">Earnings</a>
-                        <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Revenue</a>
-                        <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Projects</a>
+                        <!-- <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Revenue</a> -->
+                        <!-- <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Projects</a> -->
                     </div>
                 </div>
             </li>
@@ -100,7 +100,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">setting landingpage</h6>
-                        <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">page</a>
+                        <a class="collapse-item" href="#" onclick="moveContentToWebsitePage()">page</a>
                     </div>
                 </div>
             </li>
@@ -260,12 +260,11 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Task
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div id="card-earning-monthly-3"
-                                                        class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                    <div id="card-earning-monthly-3" class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
                                                 </div>
                                                 <div class="col">
                                                     <div id="card-earning-monthly-3_1"
@@ -442,7 +441,7 @@
                                 <div class="card-body">
                                     <div class="embed-responsive embed-responsive-16by9 h-100">
                                         <embed class="embed-responsive-item"
-                                            src="https://damartripamungkas.github.io/task" allowfullscreen>
+                                            src="https://jnbo29.csb.app/" allowfullscreen>
                                         </embed>
                                     </div>
                                 </div>
@@ -664,7 +663,7 @@
             {
                 page: "dashboard-messagechat",
                 execution: "answer email message to Mark",
-                date: "01/04/2022"
+                date: "1/1/2022 15.00.00"
             }
         ];
 
@@ -780,11 +779,11 @@
                 return true;
             });
             if (mapping) {
-                const valueFor_3 = getRandomNumberBetween(1, 100);
+                const valueFor_3 = dataContentTaskTask[0].process; // getRandomNumberBetween(1, 100);
                 document.getElementById('card-earning-monthly-1').innerText = `Rp${earnings.monthly.toLocaleString("id", "ID")}`;
                 document.getElementById('card-earning-monthly-2').innerText = `Rp${earnings.annual.toLocaleString("id", "ID")}`;
-                document.getElementById('card-earning-monthly-3').innerText = `${valueFor_3}%`;
-                document.getElementById('card-earning-monthly-3_1').innerHTML = `<div class="progress-bar bg-info" role="progressbar" style="width: ${valueFor_3}%" aria-valuenow="${valueFor_3}" aria-valuemin="0" aria-valuemax="100"></div>`;
+                document.getElementById('card-earning-monthly-3').innerText = `${valueFor_3}`;
+                document.getElementById('card-earning-monthly-3_1').innerHTML = `<div class="progress-bar bg-info" role="progressbar" style="width: ${valueFor_3}" aria-valuenow="${valueFor_3.replace("%", "")}" aria-valuemin="0" aria-valuemax="100"></div>`;
             }
         };
 
@@ -844,7 +843,7 @@
                 activityLogRecord.push({
                     page: "task-task",
                     execution: `edit data ${pemesan}`,
-                    date: new Date().toLocaleDateString("id", "ID")
+                    date: new Date().toLocaleString()
                 });
                 Swal.fire('Edit data success', '', 'success');
                 hiddenModal("modal-button-edit-from-task-task-table", moveContentToTaskTask);      
@@ -875,7 +874,7 @@
                 activityLogRecord.push({
                     page: "task-task",
                     execution: `add data ${val4}`,
-                    date: new Date().toLocaleDateString("id", "ID")
+                    date: new Date().toLocaleString()
                 });
                 hiddenModal("modal-button-add-new-data-task-task", moveContentToTaskTask);
             }
@@ -893,7 +892,7 @@
                     activityLogRecord.push({
                         page: "task-task",
                         execution: `delete data ${dataContentTaskTask[id].pemesan}`,
-                        date: new Date().toLocaleDateString("id", "ID")
+                        date: new Date().toLocaleString()
                     });
                     delete dataContentTaskTask[id];
                     Swal.fire('Delete success', '', 'success')
@@ -914,7 +913,7 @@
                     activityLogRecord.push({
                         page: "admin-earnings",
                         execution: `delete data ${dataContentAdminEarnings[id].id}`,
-                        date: new Date().toLocaleDateString("id", "ID")
+                        date: new Date().toLocaleString()
                     });
                     delete dataContentAdminEarnings[id];
                     Swal.fire('Delete success', '', 'success')
@@ -993,6 +992,10 @@
             }
         };
 
+        var moveContentToWebsitePage = () => {
+                idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Setting Landingpage</h1></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <div class="embed-responsive embed-responsive-16by9 h-100"><iframe class="embed-responsive-item" loading="lazy" src="https://codesandbox.io/embed/sleepy-water-jnbo29?codemirror=1&fontsize=14&hidenavigation=1&theme=dark" onload="" allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking" sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts" allowfullscreen></iframe> </div></div></div></div></div>`;
+        };
+
         var resetAllContentToLoginPage = () => {
             idBodyPageTop.innerHTML = `<div class="container"> <div class="row justify-content-center"> <div class="col-xl-10 col-lg-12 col-md-9"> <div class="card o-hidden border-0 shadow-lg my-5"> <div class="card-body p-0"> <div class="row"> <div class="col-lg-6 d-none d-lg-block bg-login-image"></div><div class="col-lg-6"> <div class="p-5"> <div class="text-center"> <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1> </div><form class="user"> <div class="form-group"> <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..."> </div><div class="form-group"> <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password"> </div><div class="form-group"> <div class="custom-control custom-checkbox small"> <input type="checkbox" class="custom-control-input" id="customCheck"> <label class="custom-control-label" for="customCheck">Remember Me</label> </div></div><a href="index.html" class="btn btn-primary btn-user btn-block">Login</a> <hr> <a href="index.html" class="btn btn-google btn-user btn-block"> <i class="fab fa-google fa-fw"></i> Login with Google </a> <a href="index.html" onclick="" class="btn btn-facebook btn-user btn-block"> <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook </a> </form> <hr> <div class="text-center"> <a class="small" href="#">Forgot Password?</a> </div><div class="text-center"> <a class="small" href="#">Create an Account!</a> </div></div></div></div></div></div></div></div></div>`;
         };
@@ -1004,7 +1007,7 @@
             activityLogRecord.push({
                 page: "task~task",
                 execution: "generate report pdf table",
-                date: new Date().toLocaleDateString("id", "ID")
+                date: new Date().toLocaleString()
             });
         };
 
@@ -1024,7 +1027,7 @@
                     activityLogRecord.push({
                         page: "dashboard",
                         execution: "generate report pdf chart area and pie",
-                        date: new Date().toLocaleDateString("id", "ID")
+                        date: new Date().toLocaleString()
                     });
                 }
             }
