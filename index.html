@@ -846,8 +846,8 @@
             if (earning.length == 0 || datefrom.length == 0 || dateto.length == 0) {
                 Swal.fire('All fields must be filled', '', 'error');
             } else {
-                dataContentTaskTask[lastIndexDataContentAdminEarningsEdit] = {
-                    earning,
+                (content == "annual" ? dataContentAdminEarnings.annual : dataContentAdminEarnings.monthly)[lastIndexDataContentAdminEarningsEdit] = {
+                    earning: parseInt(earning),
                     datefrom: datefrom.split("-").reverse().toString().replace(/,/g, "/"),
                     dateto: dateto.split("-").reverse().toString().replace(/,/g, "/"),
                 };
@@ -978,7 +978,7 @@
                     });
                     delete dataContent[id];
                     Swal.fire('Delete success', '', 'success');
-                    moveContentToAdminEarnings();
+                    moveContentToAdminEarnings(content);
                 }
             })
         };
