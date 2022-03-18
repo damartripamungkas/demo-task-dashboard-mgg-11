@@ -708,7 +708,7 @@
             {
                 name: 'Mark',
                 email: 'otto@website.com',
-                message: 'ini contoh isi email',
+                message: 'baik terimakasih dana sudah masuk ke rekening',
                 waktu: '1'
             },
         ];
@@ -776,7 +776,7 @@
             const idCardEarning4 = document.getElementById('card-earning-monthly-4');
             for (let index = 0; index < lengthListData; index++) {
                 const element = listDataMessageChatNotifications[index];
-                temporaryText = temporaryText.concat(` <a class="dropdown-item d-flex align-items-center" href="#" onclick="moveContentToMessageChatEmail()"> <div class="dropdown-list-image mr-3"> <img class="rounded-circle" src="https://raw.githubusercontent.com/damartripamungkas/task-dashboard/main/img/undraw_profile_1.svg" alt="..."> <div class="status-indicator bg-success"></div></div><div class="font-weight-bold"> <div class="text-truncate">${element.message}</div><div class="small text-gray-500">${element.email}· ${element.waktu}m</div></div></a> `);
+                temporaryText = temporaryText.concat(` <a class="dropdown-item d-flex align-items-center" href="#" onclick="moveContentToMessageChatEmail()"> <div class="dropdown-list-image mr-3"> <img class="rounded-circle" src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="..."> <div class="status-indicator bg-success"></div></div><div class="font-weight-bold"> <div class="text-truncate">${element.message}</div><div class="small text-gray-500">${element.email}· ${element.waktu}m</div></div></a> `);
 
                 idNotifNewCount.innerText = index + 1;
                 idCardEarning4.innerText = index + 1;
@@ -1076,7 +1076,9 @@
         var moveContentToWebsitePage = () => {
             idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Setting Landingpage</h1></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <div class="embed-responsive embed-responsive-16by9 h-100"><iframe class="embed-responsive-item" loading="lazy" src="https://codesandbox.io/embed/sleepy-water-jnbo29?codemirror=1&fontsize=14&hidenavigation=1&theme=dark" allowfullscreen></iframe> </div></div></div></div></div>`;
         };
+
         var moveContentToMessageChatEmail = () => {
+            document.getElementById("message-chat-notifications-new-count").textContent = "";
             idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Message Chat Email</h1></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <div id="message-chat" class="row rounded-lg"> <div id="message-chat-user-box" class="col-5 px-0"> <div class="bg-white"> <div class="bg-gray px-4 py-2 bg-light"> <p class="h5 mb-0 py-1">Recent</p></div><div class="messages-box"> <div class="list-group rounded-0"> <a href="#" onclick="historyMessageChatEmail('otto@website.com')" id="message-chat-user-box-otto@website.com" class="list-group-item list-group-item-action list-group-item-light rounded-0"> <div class="media"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <span id="message-chat-user-box-count-in-message-otto@website.com" class="badge badge-danger badge-counter">1</span> <div class="media-body ml-4"> <div class="d-flex align-items-center justify-content-between mb-1"> <h6 class="mb-0">otto@website.com</h6> <small class="small font-weight-bold">1/1/2022</small> </div><p class="font-italic mb-0 text-small">baik terimakasih dana sudah masuk ke rekening</p></div></div></a> </div></div></div></div></div></div></div></div>`;
         };
 
