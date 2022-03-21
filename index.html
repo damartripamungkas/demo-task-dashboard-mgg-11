@@ -697,7 +697,7 @@
 
         let listDataMessageChatTable = [
             {
-                name: 'Mark',
+                name: 'otto',
                 email: 'otto@website.com',
                 message: 'ini contoh isi email',
                 waktu: '01/02/2022'
@@ -706,11 +706,19 @@
 
         let listDataMessageChatNotifications = [
             {
-                name: 'Mark',
+                name: 'otto',
                 email: 'otto@website.com',
                 message: 'baik terimakasih dana sudah masuk ke rekening',
-                waktu: '1'
+                waktu: '1',
+                imgSrc: 'https://bootstrapious.com/i/snippets/sn-chat/avatar.svg'
             },
+            {
+                name: 'alex',
+                email: 'alex@website.com',
+                message: 'nanti saya akan cv di sini',
+                waktu: '1',
+                imgSrc: 'https://cdn-icons-png.flaticon.com/512/3011/3011270.png'
+            }
         ];
 
         const hiddenModal = (id, funcMove, funcParams) => setTimeout(() => { $(`#${id}`).modal('hide'); funcMove(funcParams) }, 900);
@@ -776,7 +784,7 @@
             const idCardEarning4 = document.getElementById('card-earning-monthly-4');
             for (let index = 0; index < lengthListData; index++) {
                 const element = listDataMessageChatNotifications[index];
-                temporaryText = temporaryText.concat(` <a class="dropdown-item d-flex align-items-center" href="#" onclick="moveContentToMessageChatEmail()"> <div class="dropdown-list-image mr-3"> <img class="rounded-circle" src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="..."> <div class="status-indicator bg-success"></div></div><div class="font-weight-bold"> <div class="text-truncate">${element.message}</div><div class="small text-gray-500">${element.email}· ${element.waktu}m</div></div></a> `);
+                temporaryText = temporaryText.concat(`<a class="dropdown-item d-flex align-items-center" href="#" onclick="moveContentToMessageChatEmail()"> <div class="dropdown-list-image mr-3"> <img class="rounded-circle" src="${element.imgSrc}" alt="..."> <div class="status-indicator bg-success"></div></div><div class="font-weight-bold"> <div class="text-truncate">${element.message}</div><div class="small text-gray-500">${element.email}· ${element.waktu}m</div></div></a>`);
 
                 idNotifNewCount.innerText = index + 1;
                 idCardEarning4.innerText = index + 1;
@@ -1077,19 +1085,23 @@
             idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Setting Landingpage</h1></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <div class="embed-responsive embed-responsive-16by9 h-100"><iframe class="embed-responsive-item" loading="lazy" src="https://codesandbox.io/embed/sleepy-water-jnbo29?codemirror=1&fontsize=14&hidenavigation=1&theme=dark" allowfullscreen></iframe> </div></div></div></div></div>`;
         };
 
-        let countClickHistoryMessageChatEmail = 0;
+        let countClickHistoryMessageChatEmail = [];
         var moveContentToMessageChatEmail = () => {
             document.getElementById("message-chat-notifications-new-count").textContent = "";
             document.getElementById("message-chat-notifications").innerHTML = `<center><div class="text-truncate">not found</div></center>`;
-            idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Message Chat Email</h1></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <div id="message-chat" class="row rounded-lg"> <div id="message-chat-user-box" class="col-5 px-0"> <div class="bg-white"> <div class="bg-gray px-4 py-2 bg-light"> <p class="h5 mb-0 py-1">Recent</p></div><div class="messages-box"> <div class="list-group rounded-0"> <a href="#" onclick="historyMessageChatEmail('otto@website.com')" id="message-chat-user-box-otto@website.com" class="list-group-item list-group-item-action list-group-item-light rounded-0"> <div class="media"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <span id="message-chat-user-box-count-in-message-otto@website.com" class="badge badge-danger badge-counter">1</span> <div class="media-body ml-4"> <div class="d-flex align-items-center justify-content-between mb-1"> <h6 class="mb-0">otto@website.com</h6> <small class="small font-weight-bold">1/1/2022</small> </div><p class="font-italic mb-0 text-small">baik terimakasih dana sudah masuk ke rekening</p></div></div></a> </div></div></div></div></div></div></div></div>`;
-            if (countClickHistoryMessageChatEmail == 1) {
+            idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Message Chat Email</h1> </div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <div id="message-chat" class="row rounded-lg"> <div id="message-chat-user-box" class="col-5 px-0"> <div class="bg-white"> <div class="bg-gray px-4 py-2 bg-light"> <p class="h5 mb-0 py-1">Recent</p></div><div class="messages-box"> <div class="list-group rounded-0"> <a href="#" onclick="historyMessageChatEmail('otto@website.com')" id="message-chat-user-box" class="list-group-item list-group-item-action list-group-item-light rounded-0"> <div class="media"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <span id="message-chat-user-box-count-in-message-otto@website.com" class="badge badge-danger badge-counter">1</span> <div class="media-body ml-4"> <div class="d-flex align-items-center justify-content-between mb-1"> <h6 class="mb-0">otto@website.com</h6> <small class="small font-weight-bold">18/3/2022</small> </div><p class="font-italic mb-0 text-small">baik terimakasih dana sudah masuk ke rekening</p></div></div></a> </div><div class="list-group rounded-0"> <a href="#" onclick="historyMessageChatEmail('alex@website.com')" id="message-chat-user-box" class="list-group-item list-group-item-action list-group-item-light rounded-0"> <div class="media"> <img src="https://cdn-icons-png.flaticon.com/512/3011/3011270.png" alt="user" width="50" class="rounded-circle"> <span id="message-chat-user-box-count-in-message-alex@website.com" class="badge badge-danger badge-counter">1</span> <div class="media-body ml-4"> <div class="d-flex align-items-center justify-content-between mb-1"> <h6 class="mb-0">alex@website.com</h6> <small class="small font-weight-bold">18/3/2022</small> </div><p class="font-italic mb-0 text-small">nanti saya akan cv di sini</p></div></div></a> </div></div></div></div></div></div></div></div>`;
+            if (countClickHistoryMessageChatEmail[0] == 1) {
                 const countInMessage = document.getElementById("message-chat-user-box-count-in-message-otto@website.com");
+                countInMessage.value = "";
+                countInMessage.style.display = "none";
+            } else if (countClickHistoryMessageChatEmail[1] == 1) {
+                const countInMessage = document.getElementById("message-chat-user-box-count-in-message-alex@website.com");
                 countInMessage.value = "";
                 countInMessage.style.display = "none";
             }
         };
 
-        var autoAddSenderMessageChatEmail = (id) => {
+        var autoAddSenderMessageChatEmail = (id, imgSrc) => {
             const getId = document.getElementById(id);
             const listPesan = [
                 "saya cape banget duh",
@@ -1103,32 +1115,48 @@
 
             const msg = listPesan[Math.floor(Math.random() * listPesan.length)];
             setTimeout(() => {
-                getId.innerHTML += `<div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">${msg}</p></div><p class="small text-muted">${new Date().toLocaleString().split(" ").reverse().toString().replace(",", " | ")}</p></div></div>`;
+                getId.innerHTML += `<div class="media w-50 mb-3"> <img src="${imgSrc}" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">${msg}</p></div><p class="small text-muted">${new Date().toLocaleString().split(" ").reverse().toString().replace(",", " | ")}</p></div></div>`;
                 getId.scrollTop = getId.scrollHeight;
             }, 700);
         };
 
-        var addReceiverMessageChatEmail = (id, id2) => {
+        var addReceiverMessageChatEmail = (id, id2, imgSrc) => {
             const valueInput = document.getElementById(id2);
             const getId1 = document.getElementById(id);
             getId1.innerHTML += `<div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">${valueInput.value}</p></div><p class="small text-muted">${new Date().toLocaleString().split(" ").reverse().toString().replace(",", " | ")}</p></div></div>`;
             getId1.scrollTop = getId1.scrollHeight;
             valueInput.value = "";
-            autoAddSenderMessageChatEmail(id);
+            autoAddSenderMessageChatEmail(id, imgSrc);
         };
 
         var historyMessageChatEmail = (sender) => {
+            const queryMesageValue = document.querySelectorAll('[id=message-chat-box-value]');
+            const getIdChatUserBox = document.querySelectorAll('[id=message-chat-user-box]');
+            getIdChatUserBox.forEach((it, index) => {
+                it.className.indexOf("active") != -1 ? getIdChatUserBox[index].classList.remove("active") : null;
+            });
             if (sender == "otto@website.com") {
-                if (document.getElementById("message-chat-box-otto@website.com") == null) {
-                    const countInMessage = document.getElementById("message-chat-user-box-count-in-message-otto@website.com");
-                    countInMessage.value = "";
-                    countInMessage.style.display = "none";
-                    document.getElementById("message-chat-user-box-otto@website.com").classList.add("active");
-                    document.getElementById("message-chat").innerHTML += `<div id="message-chat-box-otto@website.com" class="col-7 px-0"> <div id="message-chat-box-addclass-otto@website.com" class="px-4 py-5 chat-box bg-white"> <div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">hallo saya ingin mengconvert 1 BNB coin saya ke atm bca dan berapa saya akan mendapatkan nya?</p></div><p class="small text-muted">19.23.02 | 18/3/2022</p></div></div><div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">terimakasih telah menghubungi kami, rate 1 BNB ke rupiah adalah 5.5jt / 1 BNB berarti anda akan mendapatkan 5.5.jt rupiah</p></div><p class="small text-muted">19.23.02 | 18/3/2022</p></div></div><div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">ok kalau begitu saya berminat, berikan saya address wallet anda?</p></div><p class="small text-muted">19.23.05 | 18/3/2022</p></div></div><div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">ini adalah address wallet saya 0x11223344556677889900 jika sudah mengirim harap cantumkan bukti transaksi hash anda</p></div><p class="small text-muted">19.23.08 | 18/3/2022</p></div></div><div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">hallo saya sudah mengirim 1 BNB ke alamat anda, bukti transaksi 0x26c945c218ef060fa83d</p></div><p class="small text-muted">19.23.10 | 18/3/2022</p></div></div><div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">setelah kami cek coin BNB sudah masuk, harap kirim nomor rekening atm BCA anda</p></div><p class="small text-muted">19.23.11 | 18/3/2022</p></div></div><div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">ini nomor rekening atm BCA saya 1234567</p></div><p class="small text-muted">19.23.20 | 18/3/2022</p></div></div><div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">silahkan cek rekening anda, saya telah mengirim sebesar Rp5.500.000</p></div><p class="small text-muted">19.25.02 | 18/3/2022</p></div></div><div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">baik terimakasih dana sudah masuk ke rekening</p></div><p class="small text-muted">19.26.02 | 18/3/2022</p></div></div></div><div class="bg-light"> <div class="input-group"> <input type="text" id="answer-message-chat-email-otto@website.com" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light"> <div class="input-group-append"> <button id="button-addon2" class="btn btn-link" onclick="addReceiverMessageChatEmail('message-chat-box-addclass-otto@website.com', 'answer-message-chat-email-otto@website.com')"> <i class="fa fa-paper-plane"></i></button> </div></div></div></div></div>`;
-                    const getId = document.getElementById("message-chat-box-addclass-otto@website.com");
-                    getId.scrollTop = getId.scrollHeight;
-                    countClickHistoryMessageChatEmail += 1;
-                }
+                queryMesageValue.length > 0 ? queryMesageValue.forEach((it) => it.remove()) : null;
+                const countInMessage = document.getElementById("message-chat-user-box-count-in-message-otto@website.com");
+                countInMessage.value = "";
+                countInMessage.style.display = "none";
+                getIdChatUserBox[1].classList.add("active");
+
+                document.getElementById("message-chat").innerHTML += ` <div id="message-chat-box-value" class="col-7 px-0"> <div id="message-chat-box-addclass-otto@website.com" class="px-4 py-5 chat-box bg-white"> <div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">hallo saya ingin mengconvert 1 BNB coin saya ke atm bca dan berapa saya akan mendapatkan nya?</p></div><p class="small text-muted">19.23.02 | 18/3/2022</p></div></div><div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">terimakasih telah menghubungi kami, rate 1 BNB ke rupiah adalah 5.5jt / 1 BNB berarti anda akan mendapatkan 5.5.jt rupiah</p></div><p class="small text-muted">19.23.02 | 18/3/2022</p></div></div><div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">ok kalau begitu saya berminat, berikan saya address wallet anda?</p></div><p class="small text-muted">19.23.05 | 18/3/2022</p></div></div><div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">ini adalah address wallet saya 0x11223344556677889900 jika sudah mengirim harap cantumkan bukti transaksi hash anda</p></div><p class="small text-muted">19.23.08 | 18/3/2022</p></div></div><div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">hallo saya sudah mengirim 1 BNB ke alamat anda, bukti transaksi 0x26c945c218ef060fa83d</p></div><p class="small text-muted">19.23.10 | 18/3/2022</p></div></div><div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">setelah kami cek coin BNB sudah masuk, harap kirim nomor rekening atm BCA anda</p></div><p class="small text-muted">19.23.11 | 18/3/2022</p></div></div><div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">ini nomor rekening atm BCA saya 1234567</p></div><p class="small text-muted">19.23.20 | 18/3/2022</p></div></div><div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">silahkan cek rekening anda, saya telah mengirim sebesar Rp5.500.000</p></div><p class="small text-muted">19.25.02 | 18/3/2022</p></div></div><div class="media w-50 mb-3"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">baik terimakasih dana sudah masuk ke rekening</p></div><p class="small text-muted">19.26.02 | 18/3/2022</p></div></div></div><div class="bg-light"> <div class="input-group"> <input type="text" id="answer-message-chat-email-otto@website.com" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light"> <div class="input-group-append"> <button id="button-addon2" class="btn btn-link" onclick="addReceiverMessageChatEmail('message-chat-box-addclass-otto@website.com', 'answer-message-chat-email-otto@website.com', 'https://bootstrapious.com/i/snippets/sn-chat/avatar.svg')"> <i class="fa fa-paper-plane"></i></button> </div></div></div></div></div>`;
+                const getId = document.getElementById("message-chat-box-addclass-otto@website.com");
+                getId.scrollTop = getId.scrollHeight;
+                countClickHistoryMessageChatEmail[0] = countClickHistoryMessageChatEmail[0] === undefined ? 1 : countClickHistoryMessageChatEmail[0] + 1;
+            } else if (sender == "alex@website.com") {
+                queryMesageValue.length > 0 ? queryMesageValue.forEach((it) => it.remove()) : null;
+                const countInMessage = document.getElementById("message-chat-user-box-count-in-message-alex@website.com");
+                countInMessage.value = "";
+                countInMessage.style.display = "none";
+                getIdChatUserBox[2].classList.add("active");
+
+                document.getElementById("message-chat").innerHTML += `<div id="message-chat-box-value" class="col-7 px-0"> <div id="message-chat-box-addclass-alex@website.com" class="px-4 py-5 chat-box bg-white"> <div class="media w-50 mb-3"> <img src="https://cdn-icons-png.flaticon.com/512/3011/3011270.png" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">di sini rate per eth berapa ya ?</p></div><p class="small text-muted">20.10.02 | 18/3/2022</p></div></div><div class="media w-50 ml-auto mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-white">35 jt / eth kak</p></div><p class="small text-muted">20.10.08 | 18/3/2022</p></div></div><div class="media w-50 mb-3"> <img src="https://cdn-icons-png.flaticon.com/512/3011/3011270.png" alt="user" width="50" class="rounded-circle"> <div class="media-body ml-3"> <div class="bg-light rounded py-2 px-3 mb-2"> <p class="text-small mb-0 text-muted">nanti saya akan cv di sini</p></div><p class="small text-muted">20.11.40 | 18/3/2022</p></div></div></div><div class="bg-light"> <div class="input-group"> <input type="text" id="answer-message-chat-email-alex@website.com" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light"> <div class="input-group-append"> <button id="button-addon2" class="btn btn-link" onclick="addReceiverMessageChatEmail('message-chat-box-addclass-alex@website.com', 'answer-message-chat-email-alex@website.com', 'https://cdn-icons-png.flaticon.com/512/3011/3011270.png')"> <i class="fa fa-paper-plane"></i></button> </div></div></div></div></div>`;
+                const getId = document.getElementById("message-chat-box-addclass-alex@website.com");
+                getId.scrollTop = getId.scrollHeight;
+                countClickHistoryMessageChatEmail[1] = countClickHistoryMessageChatEmail[1] === undefined ? 1 : countClickHistoryMessageChatEmail[1] + 1;
             }
         };
 
