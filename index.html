@@ -1084,7 +1084,7 @@
                 try {
                     const request = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${name}&vs_currencies=${vsFiat}`); // get price with params address
                     const amountResult = request.data[name][vsFiat];
-                    return BigInt(amountResult * inputAmount);
+                    return amountResult * inputAmount;
                 } catch (err) {
                     console.log(err);
                     return null;
