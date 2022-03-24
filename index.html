@@ -81,7 +81,8 @@
                             Annual</a>
                         <a class="collapse-item" href="#" onclick="moveContentToAdminEarnings('monthly')">Earnings
                             Monthly</a>
-                        <a class="collapse-item" href="#" onclick="moveContentToAdminPriceProduct()">Price Product</a>
+                        <a class="collapse-item" href="#"
+                            onclick="moveContentToAdminPriceProduct('bitcoin', 'idr')">Price Product</a>
                         <!-- <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Revenue</a> -->
                         <!-- <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Projects</a> -->
                     </div>
@@ -613,6 +614,9 @@
     <!-- axios request -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
 
+    <!-- coingecko chart widget -->
+    <script src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"></script>
+
     <!-- chart-demo.js -->
     <script lang="text/javascript">
         Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -1131,18 +1135,62 @@
             const nameFiatCurrency = document.getElementById("select-fiat-currency");
             const valueCoinCrypto = document.getElementById("input-value-coin-crypto");
             const valueFiatCurrency = document.getElementById("input-value-fiat-currency");
+            const chartWidgetCrypto = document.getElementById("chart-crypto-vs-fiat");
             for (let index = 0; index < lengthContractAndNameCrypto; index++) {
                 const element = contractAndNameCrypto[index];
                 if (element.symbol == nameCoinCrypto.value) {
                     const gettingPrice = await getPrice(element.name, nameFiatCurrency.value, valueCoinCrypto.value);
-                    valueFiatCurrency.value = gettingPrice;
+                    chartWidgetCrypto.innerHTML = `<coingecko-coin-price-chart-widget  coin-id="${element.name}" currency="${nameFiatCurrency.value}" height="300" locale="id" background-color="#ffffff"></coingecko-coin-price-chart-widget>`;
+                    valueFiatCurrency.value = gettingPrice.toLocaleString("id", "ID");
                     document.getElementById("loading-process-symbol").className = "fas fa-arrow-down";
                 }
             }
         };
 
-        var moveContentToAdminPriceProduct = () => {
-            idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Get price product</h1></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <br><div class="input-group col-lg-12 mb-3"> <div class="input-group-prepend"> <select class="custom-select" id="select-coin-crypto" onclick="updateInputValueCoinCryptoVsFiat()"> <option selected>BTC</option> <option>ETH</option> <option>DOGE</option> <option>ADA</option> </select> </div><input type="text" class="form-control" id="input-value-coin-crypto" oninput="updateInputValueCoinCryptoVsFiat()" value="0"> </div><center> <div class="fas fa-arrow-down" id="loading-process-symbol"></div></center> <br><div class="input-group col-lg-12 mb-3"> <div class="input-group-prepend"> <select class="custom-select" id="select-fiat-currency" onclick="updateInputValueCoinCryptoVsFiat()"> <option selected>IDR</option> <option>USD</option> </select> </div><input type="text" class="form-control" id="input-value-fiat-currency" readonly> </div></div></div></div></div>`;
+        var moveContentToAdminPriceProduct = (crypto, fiat) => {
+            idContainerFluid.innerHTML = `
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+   <h1 class="h3 mb-0 text-gray-800">Get price product</h1>
+</div>
+<div class="row">
+   <div class="col-lg-12 mb-4">
+      <div class="card shadow mb-4">
+         <div class="card-body">
+            <br>
+
+            <div class="col-lg-12 mb-3" id="chart-crypto-vs-fiat">
+               <coingecko-coin-price-chart-widget  coin-id="bitcoin" currency="idr" height="300" locale="id" background-color="#ffffff"></coingecko-coin-price-chart-widget>
+            </div>
+
+            <div class="input-group col-lg-12 mb-3">
+               <div class="input-group-prepend">
+                  <select class="custom-select" id="select-coin-crypto" onclick="updateInputValueCoinCryptoVsFiat()">
+                     <option selected>BTC</option>
+                     <option>ETH</option>
+                     <option>DOGE</option>
+                     <option>ADA</option>
+                  </select>
+               </div>
+               <input type="text" class="form-control" id="input-value-coin-crypto" oninput="updateInputValueCoinCryptoVsFiat()" value="0"> 
+            </div>
+            <center>
+               <div class="fas fa-arrow-down" id="loading-process-symbol"></div>
+            </center>
+            <br>
+            <div class="input-group col-lg-12 mb-3">
+               <div class="input-group-prepend">
+                  <select class="custom-select" id="select-fiat-currency" onclick="updateInputValueCoinCryptoVsFiat()">
+                     <option selected>IDR</option>
+                     <option>USD</option>
+                  </select>
+               </div>
+               <input type="text" class="form-control" id="input-value-fiat-currency" readonly> 
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+            `;
         };
 
         var moveContentToTaskTask = () => {
