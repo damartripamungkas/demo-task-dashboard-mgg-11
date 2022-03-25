@@ -81,8 +81,7 @@
                             Annual</a>
                         <a class="collapse-item" href="#" onclick="moveContentToAdminEarnings('monthly')">Earnings
                             Monthly</a>
-                        <a class="collapse-item" href="#"
-                            onclick="moveContentToAdminPriceProduct('bitcoin', 'idr')">Price Product</a>
+                        <a class="collapse-item" href="#" onclick="moveContentToAdminPriceProduct()">Price Product</a>
                         <!-- <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Revenue</a> -->
                         <!-- <a class="collapse-item" href="#" onclick="renderSweetAlertMaintenance()">Projects</a> -->
                     </div>
@@ -1011,8 +1010,8 @@
             if (val1.length == 0 || val2.length == 0 || val3.length == 0) {
                 Swal.fire('All fields must be filled', '', 'error');
             } else {
-                renderSweetAlertSuccess();
-                const obj = { earning: val1, datefrom: val2.split("-").reverse().toString().replace(/,/g, "/"), dateto: val3.split("-").reverse().toString().replace(/,/g, "/") };
+                Swal.fire('Add data success', '', 'success');
+                const obj = { earning: parseInt(val1), datefrom: val2.split("-").reverse().toString().replace(/,/g, "/"), dateto: val3.split("-").reverse().toString().replace(/,/g, "/") };
                 (content == "annual" ? dataContentAdminEarnings.annual : dataContentAdminEarnings.monthly).push(obj);
                 activityLogRecord.push({
                     page: `admin-earnings_${content}`,
@@ -1147,50 +1146,8 @@
             }
         };
 
-        var moveContentToAdminPriceProduct = (crypto, fiat) => {
-            idContainerFluid.innerHTML = `
-            <div class="d-sm-flex align-items-center justify-content-between mb-4">
-   <h1 class="h3 mb-0 text-gray-800">Get price product</h1>
-</div>
-<div class="row">
-   <div class="col-lg-12 mb-4">
-      <div class="card shadow mb-4">
-         <div class="card-body">
-            <br>
-
-            <div class="col-lg-12 mb-3" id="chart-crypto-vs-fiat">
-               <coingecko-coin-price-chart-widget  coin-id="bitcoin" currency="idr" height="300" locale="id" background-color="#ffffff"></coingecko-coin-price-chart-widget>
-            </div>
-
-            <div class="input-group col-lg-12 mb-3">
-               <div class="input-group-prepend">
-                  <select class="custom-select" id="select-coin-crypto" onclick="updateInputValueCoinCryptoVsFiat()">
-                     <option selected>BTC</option>
-                     <option>ETH</option>
-                     <option>DOGE</option>
-                     <option>ADA</option>
-                  </select>
-               </div>
-               <input type="text" class="form-control" id="input-value-coin-crypto" oninput="updateInputValueCoinCryptoVsFiat()" value="0"> 
-            </div>
-            <center>
-               <div class="fas fa-arrow-down" id="loading-process-symbol"></div>
-            </center>
-            <br>
-            <div class="input-group col-lg-12 mb-3">
-               <div class="input-group-prepend">
-                  <select class="custom-select" id="select-fiat-currency" onclick="updateInputValueCoinCryptoVsFiat()">
-                     <option selected>IDR</option>
-                     <option>USD</option>
-                  </select>
-               </div>
-               <input type="text" class="form-control" id="input-value-fiat-currency" readonly> 
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-            `;
+        var moveContentToAdminPriceProduct = () => {
+            idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Get price product</h1></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <br><div class="col-lg-12 mb-3" id="chart-crypto-vs-fiat"> <coingecko-coin-price-chart-widget coin-id="bitcoin" currency="idr" height="300" locale="id" background-color="#ffffff"></coingecko-coin-price-chart-widget> </div><div class="input-group col-lg-12 mb-3"> <div class="input-group-prepend"> <select class="custom-select" id="select-coin-crypto" onclick="updateInputValueCoinCryptoVsFiat()"> <option selected>BTC</option> <option>ETH</option> <option>DOGE</option> <option>ADA</option> </select> </div><input type="text" class="form-control" id="input-value-coin-crypto" oninput="updateInputValueCoinCryptoVsFiat()" value="0"> </div><center> <div class="fas fa-arrow-down" id="loading-process-symbol"></div></center> <br><div class="input-group col-lg-12 mb-3"> <div class="input-group-prepend"> <select class="custom-select" id="select-fiat-currency" onclick="updateInputValueCoinCryptoVsFiat()"> <option selected>IDR</option> <option>USD</option> </select> </div><input type="text" class="form-control" id="input-value-fiat-currency" value="0" readonly> </div></div></div></div></div>`;
         };
 
         var moveContentToTaskTask = () => {
@@ -1308,7 +1265,7 @@
         var moveContentToMessageChatEmail = () => {
             document.getElementById("message-chat-notifications-new-count").textContent = "";
             document.getElementById("message-chat-notifications").innerHTML = `<center><div class="text-truncate">not found</div></center>`;
-            idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Message Chat Email</h1> </div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <div id="message-chat" class="row rounded-lg"> <div id="message-chat-user-box" class="col-5 px-0"> <div class="bg-white"> <div class="bg-gray px-4 py-2 bg-light"> <p class="h5 mb-0 py-1">Recent</p></div><div class="messages-box"> <div class="list-group rounded-0"> <a href="#" onclick="historyMessageChatEmail('otto@website.com')" id="message-chat-user-box" class="list-group-item list-group-item-action list-group-item-light rounded-0"> <div class="media"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <span id="message-chat-user-box-count-in-message-otto@website.com" class="badge badge-danger badge-counter">1</span> <div class="media-body ml-4"> <div class="d-flex align-items-center justify-content-between mb-1"> <h6 class="mb-0">otto@website.com</h6> <small class="small font-weight-bold">18/3/2022</small> </div><p class="font-italic mb-0 text-small">baik terimakasih dana sudah masuk ke rekening</p></div></div></a> </div><div class="list-group rounded-0"> <a href="#" onclick="historyMessageChatEmail('alex@website.com')" id="message-chat-user-box" class="list-group-item list-group-item-action list-group-item-light rounded-0"> <div class="media"> <img src="https://cdn-icons-png.flaticon.com/512/3011/3011270.png" alt="user" width="50" class="rounded-circle"> <span id="message-chat-user-box-count-in-message-alex@website.com" class="badge badge-danger badge-counter">1</span> <div class="media-body ml-4"> <div class="d-flex align-items-center justify-content-between mb-1"> <h6 class="mb-0">alex@website.com</h6> <small class="small font-weight-bold">18/3/2022</small> </div><p class="font-italic mb-0 text-small">nanti saya akan cv di sini</p></div></div></a> </div></div></div></div></div></div></div></div>`;
+            idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">Message Chat Email</h1></div><div class="row"><div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div id="message-chat" class="row rounded-lg"> <div id="message-chat-user-box" class="col-5 px-0"> <div class="bg-white"> <div class="bg-gray px-4 py-2 bg-light"> <p class="h5 mb-0 py-1">Recent</p></div><div class="messages-box"> <div class="list-group rounded-0"> <a href="#" onclick="historyMessageChatEmail('otto@website.com')" id="message-chat-user-box" class="list-group-item list-group-item-action list-group-item-light rounded-0"> <div class="media"> <img src="https://bootstrapious.com/i/snippets/sn-chat/avatar.svg" alt="user" width="50" class="rounded-circle"> <span id="message-chat-user-box-count-in-message-otto@website.com" class="badge badge-danger badge-counter">1</span> <div class="media-body ml-4"> <div class="d-flex align-items-center justify-content-between mb-1"> <h6 class="mb-0">otto@website.com</h6> <small class="small font-weight-bold">18/3/2022</small> </div><p class="font-italic mb-0 text-small">baik terimakasih dana sudah masuk ke rekening</p></div></div></a> </div><div class="list-group rounded-0"> <a href="#" onclick="historyMessageChatEmail('alex@website.com')" id="message-chat-user-box" class="list-group-item list-group-item-action list-group-item-light rounded-0"> <div class="media"> <img src="https://cdn-icons-png.flaticon.com/512/3011/3011270.png" alt="user" width="50" class="rounded-circle"> <span id="message-chat-user-box-count-in-message-alex@website.com" class="badge badge-danger badge-counter">1</span> <div class="media-body ml-4"> <div class="d-flex align-items-center justify-content-between mb-1"> <h6 class="mb-0">alex@website.com</h6> <small class="small font-weight-bold">18/3/2022</small> </div><p class="font-italic mb-0 text-small">nanti saya akan cv di sini</p></div></div></a> </div></div></div></div></div></div></div>`;
             if (countClickHistoryMessageChatEmail[0] == 1) {
                 const countInMessage = document.getElementById("message-chat-user-box-count-in-message-otto@website.com");
                 countInMessage.value = "";
