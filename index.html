@@ -930,9 +930,10 @@
                 if (it == "bg-dark") {
                     searchButtonNavbar.innerHTML = `<a class="btn btn-dark disabled"></a>`;
                     myNameOnNavbar.classList.replace("text-white", "text-gray-600");
-                    paddingBeginPageContent.className = "bg-white";
+                    paddingBeginPageContent.className = "bg-light";
                     navBar.classList.replace("bg-dark", "bg-white");
                     textTitle.classList.replace("text-white", "text-gray-800");
+                    buttonOnHead.children[0].children[0].textContent = "Swith Dark Mode";
                     buttonOnHead.children[0].children[0].classList.replace("btn-light", "btn-dark");
                     buttonOnHead.children[1].children[0].classList.replace("btn-light", "btn-dark");
                     idContainerFluid.classList.remove("bg-dark");
@@ -944,6 +945,7 @@
                     paddingBeginPageContent.className = "bg-dark";
                     navBar.classList.replace("bg-white", "bg-dark");
                     textTitle.classList.replace("text-gray-800", "text-white");
+                    buttonOnHead.children[0].children[0].textContent = "Swith Light Mode";
                     buttonOnHead.children[0].children[0].classList.replace("btn-dark", "btn-light");
                     buttonOnHead.children[1].children[0].classList.replace("btn-dark", "btn-light");
                     idContainerFluid.classList.add("bg-dark");
