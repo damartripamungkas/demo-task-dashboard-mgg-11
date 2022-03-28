@@ -137,7 +137,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -213,16 +213,32 @@
                 </nav>
                 <!-- End of Topbar -->
 
+                <div class="bg-light" id="padding-begin-page-content" style="padding: 12px;"></div>
+
                 <!-- Begin Page Content -->
                 <div class="container-fluid" id="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm"
+                        <div class="btn-toolbar" role="toolbar">
+                            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                                <button type="button" class="btn btn-sm btn-dark shadow-sm" onclick="swithToDarkMode()">
+                                    Swith Dark Mode
+                                </button>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Third group">
+                                <button type="button" class="btn btn-sm btn-dark shadow-sm"
+                                    onclick="generatePdfChart(['myAreaChart', 'myPieChart'])">
+                                    Generate Report
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-dark shadow-sm"
                             onclick="generatePdfChart(['myAreaChart', 'myPieChart'])">
-                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                        </a>
+                            Generate Report
+                        </a> -->
                     </div>
 
                     <!-- Content Row -->
@@ -900,6 +916,42 @@
         let lastIndexDataContentTaskTaskEdit;
         let lastIndexDataContentAdminEarningsEdit;
         let disableTimeOnTopBarSearch = false;
+
+
+        const swithToDarkMode = () => {
+            const navBar = document.querySelector("nav");
+            const searchButtonNavbar = document.querySelector(".input-group-append");
+            const myNameOnNavbar = document.querySelectorAll("span")[6];
+            const paddingBeginPageContent = document.getElementById("padding-begin-page-content");
+            const textTitle = document.querySelector("h1");
+            const buttonOnHead = document.querySelector(".btn-toolbar");
+            const footerAbove = document.querySelector("footer");
+            idContainerFluid.classList.forEach((it) => {
+                if (it == "bg-dark") {
+                    searchButtonNavbar.innerHTML = `<a class="btn btn-dark disabled"></a>`;
+                    myNameOnNavbar.classList.replace("text-white", "text-gray-600");
+                    paddingBeginPageContent.className = "bg-white";
+                    navBar.classList.replace("bg-dark", "bg-white");
+                    textTitle.classList.replace("text-white", "text-gray-800");
+                    buttonOnHead.children[0].children[0].classList.replace("btn-light", "btn-dark");
+                    buttonOnHead.children[1].children[0].classList.replace("btn-light", "btn-dark");
+                    idContainerFluid.classList.remove("bg-dark");
+                    footerAbove.classList.replace("bg-dark", "bg-white");
+                    footerAbove.children[0].children[0].innerHTML = `<span>Copyright © Dashboard 2022</span>`;
+                } else if (it != "bg-dark") {
+                    searchButtonNavbar.innerHTML = `<a class="btn btn-light disabled"></a>`;
+                    myNameOnNavbar.classList.replace("text-gray-600", "text-white");
+                    paddingBeginPageContent.className = "bg-dark";
+                    navBar.classList.replace("bg-white", "bg-dark");
+                    textTitle.classList.replace("text-gray-800", "text-white");
+                    buttonOnHead.children[0].children[0].classList.replace("btn-dark", "btn-light");
+                    buttonOnHead.children[1].children[0].classList.replace("btn-dark", "btn-light");
+                    idContainerFluid.classList.add("bg-dark");
+                    footerAbove.classList.replace("bg-white", "bg-dark");
+                    footerAbove.children[0].children[0].innerHTML = `<span class="text-white">Copyright © Dashboard 2022</span>`;
+                }
+            })
+        };
 
         const setValueFromModalButtonEditTableTaskTask = (index) => {
             lastIndexDataContentTaskTaskEdit = index;
