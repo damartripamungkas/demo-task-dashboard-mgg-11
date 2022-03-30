@@ -752,20 +752,20 @@
             dateofbirth: ""
         };
 
-        const getDataContentProfileProfile = async () => {
+        const getDataFromBackend = async (path) => {
             try {
-                const data = await axios.get("https://ggu18j.sse.codesandbox.io/profile");
-                console.log(data.data.profile);
-                return data.data.profile;
+                const data = await axios.get(`https://ggu18j.sse.codesandbox.io/${path}`);
+                console.log(data.data[path]);
+                return data.data[path];
             } catch (err) {
                 console.log(err);
             }
         };
 
-        const setDataContentProfileProfile = async (json) => {
+        const saveDataToBackend = async (path, json) => {
             try {
-                const data = await axios.post("https://ggu18j.sse.codesandbox.io/profile", json);
-                return data.data.profile;
+                const data = await axios.post(`https://ggu18j.sse.codesandbox.io/${path}`, json);
+                return data.data[path];
             } catch (err) {
                 console.log(err);
             }
@@ -789,8 +789,8 @@
         // set data navbar first time 
         (async () => {
             setDataProfileOnNavbar(undefined, undefined, true);
-            const getData = await getDataContentProfileProfile();
-            setDataProfileOnNavbar(getData.name, getData.profileUrlOrBase64, false);
+            const getData1 = await getDataFromBackend("profile");
+            setDataProfileOnNavbar(getData1.name, getData1.profileUrlOrBase64, false);
         })();
 
         const hiddenModal = (id, funcMove, funcParams) => setTimeout(() => { $(`#${id}`).modal('hide'); funcMove(funcParams) }, 900);
@@ -919,6 +919,7 @@
 
 
         const swithToDarkMode = () => {
+            let togle = false;
             const navBar = document.querySelector("nav");
             const searchButtonNavbar = document.querySelector(".input-group-append");
             const myNameOnNavbar = document.querySelectorAll("span")[6];
@@ -926,8 +927,8 @@
             const textTitle = document.querySelector("h1");
             const buttonOnHead = document.querySelector(".btn-toolbar");
             const footerAbove = document.querySelector("footer");
-            idContainerFluid.classList.forEach((it) => {
-                if (it == "bg-dark") {
+            idContainerFluid.classList.forEach(async (it) => {
+                if (it == "bg-dark" && togle === false) {
                     searchButtonNavbar.innerHTML = `<a class="btn btn-dark disabled"></a>`;
                     myNameOnNavbar.classList.replace("text-white", "text-gray-600");
                     paddingBeginPageContent.className = "bg-light";
@@ -939,7 +940,7 @@
                     idContainerFluid.classList.remove("bg-dark");
                     footerAbove.classList.replace("bg-dark", "bg-white");
                     footerAbove.children[0].children[0].innerHTML = `<span>Copyright © Dashboard 2022</span>`;
-                } else if (it != "bg-dark") {
+                } else if (it != "bg-dark" && togle === false) {
                     searchButtonNavbar.innerHTML = `<a class="btn btn-light disabled"></a>`;
                     myNameOnNavbar.classList.replace("text-gray-600", "text-white");
                     paddingBeginPageContent.className = "bg-dark";
@@ -1125,7 +1126,10 @@
                     return ``;
                 } else {
                     let [datefrom, dateto] = [it.datefrom.split("/"), it.dateto.split("/")];
-                    [datefrom, dateto] = [`${datefrom[0]} ${monthNames[Math.ceil(dateto[1]) - 1]} ${dateto[2]}`, `${dateto[0]} ${monthNames[Math.ceil(dateto[1]) - 1]} ${dateto[2]}`];
+                    [datefrom, dateto] = [
+                        `${datefrom[0]} ${monthNames[Math.ceil(datefrom[1]) - 1]} ${datefrom[2]}`,
+                        `${dateto[0]} ${monthNames[Math.ceil(dateto[1]) - 1]} ${dateto[2]}`
+                    ];
                     return it = `<tr><td>${index + 1}</td><td>Rp${it.earning.toLocaleString("id", "ID")}</td><td>${datefrom}</td><td>${dateto}</td><div class="btn-toolbar" role="toolbar"><td class="btn-group mr-2 btn btn-secondary btn-sm" role="group" id="${index}" data-toggle="modal" data-target="#modal-button-edit-data-earning-table" onclick="setValueFromModalButtonEditTableAdminEarnings('${content}', ${index})">edit</td><td class="btn-group btn btn-danger btn-sm" role="group" id="${index}" onclick="deleteDataContentAdminEarnings('${content}', ${index})">delete</td></div></tr>`;
                 }
             });
@@ -1232,7 +1236,7 @@
             idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">My Profile</h1> </div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <center> <br></br><br></br> <div class="spinner-border"></div><br></br><br></br> </center> </div></div></div></div>`;
             setDataProfileOnNavbar(undefined, undefined, true);
             (async () => {
-                const dataContentProfileProfile = await getDataContentProfileProfile();
+                const dataContentProfileProfile = await getDataFromBackend("profile");
                 if (dataContentAdminEarnings) {
                     idContainerFluid.innerHTML = `<div class="d-sm-flex align-items-center justify-content-between mb-4"> <h1 class="h3 mb-0 text-gray-800">My Profile</h1></div><div class="row"> <div class="col-lg-12 mb-4"> <div class="card shadow mb-4"> <div class="card-body"> <div class="tab-pane active"> <div class="form-group"> <center> <img src="" id="profile-settings" class="img-profile rounded-circle" style="max-width: 25%; max-height: 25%;" alt="avatar"> </center> </div><div class="form-group col-lg-12"> <div class="col-xs-12"> <br><label> <h5>Profile image</h5> </label> <input type="file" class="form-control" id="profile-settings" disabled> </div></div><div class="form-group col-lg-12"> <div class="col-xs-6"> <br><label> <h5>First name</h5> </label> <input type="text" class="form-control" id="profile-settings" disabled required> </div></div><div class="form-group col-lg-12"> <div class="col-xs-6"> <br><label> <h5>Last name</h5> </label> <input type="text" class="form-control" id="profile-settings" disabled required> </div></div><div class="form-group col-lg-12"> <div class="col-xs-6"> <br><label> <h5>Phone</h5> </label> <input type="number" class="form-control" id="profile-settings" disabled required> </div></div><div class="form-group col-lg-12"> <div class="col-xs-6"> <br><label> <h5>Email</h5> </label> <input type="email" class="form-control" id="profile-settings" disabled required> </div></div><div class="form-group col-lg-12"> <div class="col-xs-6"> <br><label> <h5>Address</h5> </label> <input type="text" class="form-control" id="profile-settings" disabled required> </div></div><div class="form-group col-lg-12"> <div class="col-xs-6"> <br><label> <h5>Date of birth</h5> </label> <input type="date" class="form-control" id="profile-settings" disabled required> </div></div><div class="form-group col-lg-12"> <div class="col-xs-12"> <br><br><center> <button class="btn btn-success" onclick="changesValueProfileProfile()">Save</button> <button class="btn btn-secondary" onclick="setStatusChangesProfileProfile('disable')">Changes</button> </center> </div></div></div></div></div></div></div>`;
                     const getSelectorProfileSettings = document.querySelectorAll('[id=profile-settings]');
@@ -1266,7 +1270,7 @@
                     });
 
                     const getSelectorProfileSettings = document.querySelectorAll('[id=profile-settings]');
-                    await setDataContentProfileProfile(
+                    await saveDataToBackend("profile",
                         {
                             profile: {
                                 profileUrlOrBase64: getSelectorProfileSettings[1].value.length == 0 ? getSelectorProfileSettings[0].src : await toBase64(getSelectorProfileSettings[1].files[0]),
