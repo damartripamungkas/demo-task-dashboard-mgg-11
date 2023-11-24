@@ -26,7 +26,7 @@ This application is a dashboard that is designed for demo purposes only, but it 
 
 ### 🧱 View Demo :
 
-https://damartripamungkas.github.io/demo-task-dashboard
+https://damartripamungkas.github.io/demo-task-dashboard-mgg-11
 
 ### 📝 License :
 
